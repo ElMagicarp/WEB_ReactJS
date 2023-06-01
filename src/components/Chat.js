@@ -1,6 +1,10 @@
+import ChatContainer from './ChatContainer';
+
 function Chat(props) {
     return (
-      <div className="chatWindow">b</div>
+      <div className="chatWindow">
+        <ChatContainer channel={props.currentChan}/>
+      </div>
     );
 }
   

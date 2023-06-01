@@ -6,7 +6,7 @@ function ChannelBar(props) {
     const [channels, setChannels] = useState([]);
     const currentChannel = props.currentChan;
     useEffect(() => {
-        axios.get('//localhost:5000/api/channelList')
+        axios.get('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/channelList')
             .then((res) => {
                 setChannels(res.data.chanList)
             })

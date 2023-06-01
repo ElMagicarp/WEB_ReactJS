@@ -23,8 +23,8 @@ router.post('/send', (req, res) => {
         )
 })
 
-// curl -X GET localhost:3000/api/msglist -H 'Content-Type: application/json' -d '{"channel":"general"}'
-router.get('/msglist', (req, res) => {
+// curl -X POST localhost:3000/api/msglist -H 'Content-Type: application/json' -d '{"channel":"general"}'
+router.post('/msglist', (req, res) => {
     let chan = req.body.channel
     Message.find({ channel: chan })
         .then((messages) => {
