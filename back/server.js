@@ -2,9 +2,10 @@ require('dotenv').config();
 
 const express = require('express');
 const msg_routes = require('./middlewares/msg_routes.js');
+const channel_routes = require('./middlewares/channel_routes.js');
 const mongoose = require('mongoose');
 const mongoString = process.env.MONGODB_URL;
-const port = 3000;
+const port = 5000;
 
 // Connect to MongoDB
 mongoose.connect(mongoString);
@@ -18,10 +19,23 @@ database.once('connected', () => {
 
 // Express server
 const app = express();
+
+// Body parser
 app.use(express.json());
-//app.use(bodyParser.urlencoded({extended: false}))
+
+// CORS definition
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 app.listen(port, () => {
     console.log(`Server started at ${port}`)
 })
 
+// Routes
 app.use('/api', msg_routes);
+app.use('/api', channel_routes);

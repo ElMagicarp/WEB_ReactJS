@@ -1,7 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
 import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
+import ChatPage from './pages/ChatPage';
 import {
   BrowserRouter,
   Routes,
@@ -12,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<ChatPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>

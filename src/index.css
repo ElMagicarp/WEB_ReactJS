@@ -1,13 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito%20Sans');
+
+html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    margin:0;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    width: 100;
+    height: 100%;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+#root{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.channelBar{
+    height: 100%;
+    background-color: aquamarine;
+    width: 20%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.channelBar > .header{
+    height: 10%;
+    background-color: blue;
+    text-align: center;
+    padding : 10px;
 }
+
+.channelName{
+    cursor : pointer;
+    height: 10%;
+    background-color: blue;
+    text-align: center;
+    padding : 10px;
+}
+
+.channelName:hover{
+    background-color: #1a73e8;
+}
+
+.channelName.active{
+    background-color: #1a73e8;
+}
+
+.chatWindow{
+    height: 100%;
+    background-color: red;
+    width: 80%;
+}
+  
