@@ -7,7 +7,7 @@ function ChatInput(props) {
   const sendMsg = () => {
     axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/send', {
       channel: props.channel,
-      author: "me", //props.user,
+      author: props.user.name,
       message: value
     })
     .then(() => {
@@ -17,23 +17,24 @@ function ChatInput(props) {
       console.log(err)
     });
   }
-    return (
-      <TextField
-          id="outlined-multiline-flexible"
-          label="Message"
-          multiline
-          sx = {{width: '80%'}}
-          inputProps={{ style: {height: "200px" }}}
-          onChange={(e) => setValue((v) => e.target.value)}
-          value={value}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              sendMsg();
-            }
-          }}
-        />
-    );
+  return (
+    <TextField
+        id="outlined-multiline-flexible"
+        label="Message"
+        multiline
+        fullWidth
+        sx= {{backgroundColor: "rgba(255, 255, 255, 0.7)"}}
+        inputProps={{ style: {height: "100px" }}}
+        onChange={(e) => setValue((v) => e.target.value)}
+        value={value}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMsg();
+          }
+        }}
+      />
+  );
 }
   
 export default ChatInput;
