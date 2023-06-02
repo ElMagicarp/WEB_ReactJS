@@ -24,7 +24,7 @@ function ChatInput(props) {
           multiline
           sx = {{width: '80%'}}
           inputProps={{ style: {height: "200px" }}}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setValue((v) => e.target.value)}
           value={value}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
