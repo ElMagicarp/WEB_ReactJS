@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChannelName from './ChannelName';
+import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
 
 function ChannelBar(props) {
     const [channels, setChannels] = useState([]);
@@ -17,11 +19,18 @@ function ChannelBar(props) {
     return (
       <div className="channelBar">
         <div className="header">
-            <h1>channels</h1>
+            <h1>tc chat</h1>
         </div>
-        <div className="channels">
-            {channels.map((chan,index) => <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>)}
-        </div>
+        <List
+            sx={{ width: '100%', bgcolor: '#8395a7'}}
+            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}
+            >
+            {
+            channels.map((chan,index) => 
+            <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
+            )
+            }
+        </List>
       </div>
     );
 }

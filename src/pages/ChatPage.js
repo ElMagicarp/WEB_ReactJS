@@ -4,10 +4,11 @@ import Chat from "../components/Chat";
 
 function ChatPage() {
     const [channel, setChannel] = useState("general"); 
+    const [user, setUser] = useState("");
     return (
       <>
       <ChannelBar currentChan={channel} chanHandler={setChannel}/>
-      <Chat currentChan={channel}/>
+      <Chat currentChan={channel} currentUser={user}/>
       </>
     );
 }
