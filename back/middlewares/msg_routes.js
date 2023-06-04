@@ -8,7 +8,8 @@ router.post('/send', (req, res) => {
     let data = {
         author: req.body.author,
         channel: req.body.channel,
-        message: req.body.message
+        message: req.body.message,
+        picture: req.body.picture
     }
     let message = new Message(data)
     message.save()

@@ -8,7 +8,8 @@ function ChatInput(props) {
     axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/send', {
       channel: props.channel,
       author: props.user.name,
-      message: value
+      message: value,
+      picture: props.user.picture
     })
     .then(() => {
       setValue(() => '');

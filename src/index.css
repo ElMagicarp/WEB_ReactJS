@@ -82,19 +82,28 @@ body {
     border-bottom: 2px solid rgba(0,0,0,0.05);
     padding-bottom: 10px;
     padding-top: 10px;
+    display: flex;
 }
 .message:last-child{
     border-bottom: none;
 }
 
-.message > .author{
+.message .author{
     font-weight: 900;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
-.message > .content{
-    padding-left: 20px;
+.message .author .date{
+    font-weight: 400;
+    font-size: 11px;
+    margin-left: 10px;
 }
+
+.message .msgContent {
+    padding-left: 10px;
+}   
 
 .loginPage {
     display: flex;
