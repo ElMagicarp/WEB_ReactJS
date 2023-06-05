@@ -11,7 +11,7 @@ function ChatContainer(props) {
     }, [messages])
     
     useEffect(() => {
-        let request = (scroll) => {
+        let request = () => {
             axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/msglist', {
                 channel: props.channel
             })
@@ -25,7 +25,7 @@ function ChatContainer(props) {
                 console.log(err)
             });
         }
-        request(true);
+        request();
         let refresh = window.setInterval(request, 1000);
         return () => {
             window.clearInterval(refresh);

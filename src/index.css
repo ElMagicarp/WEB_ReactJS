@@ -103,6 +103,7 @@ body {
 
 .message .msgContent {
     padding-left: 10px;
+    white-space: pre-wrap;
 }   
 
 .loginPage {

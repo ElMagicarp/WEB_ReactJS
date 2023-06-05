@@ -12,8 +12,6 @@ function App() {
   const [user, setUser] = useState({});
   let isLogged = Object.keys(user).length > 0;
 
-
-
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
@@ -22,13 +20,12 @@ function App() {
         setUser((u) => jwtDecode(response.credential));
       }
     });
-    google.accounts.id.prompt();
+    //google.accounts.id.prompt();
     google.accounts.id.renderButton(
       document.getElementById("googleSignIn"),
       {size: "large", text: "login with google", shape: "rectangular", width: "long" }
     );
   }, []);
-
 
   return (
     <BrowserRouter>

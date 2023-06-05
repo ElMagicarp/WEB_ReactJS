@@ -29,9 +29,18 @@ function ChatInput(props) {
         onChange={(e) => setValue((v) => e.target.value)}
         value={value}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            sendMsg();
+          if (e.shiftKey) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              setValue((v) => v + '\n');
+            }
+          }
+          else {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              if (value !== '')
+                sendMsg();
+            }
           }
         }}
       />
