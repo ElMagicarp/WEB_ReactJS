@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Channel = require('../models/channel.js')
 
-// curl -X GET localhost:3000/api/channelList
+// curl -X GET localhost:5000/api/channelList
 router.get('/channelList', (req, res) => {
     Channel.find()
         .then((chanArr) => {
