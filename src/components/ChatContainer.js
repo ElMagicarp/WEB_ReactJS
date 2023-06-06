@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Message from './Message';
+import { UserContext } from "../App";
 
 function ChatContainer(props) {
     const [messages, setMessages] = useState([]);
+    const user = useContext(UserContext);
 
     useEffect(() => {
         const container = document.getElementsByClassName("chatContainer")[0];
@@ -12,8 +14,13 @@ function ChatContainer(props) {
     
     useEffect(() => {
         let request = () => {
-            axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/msglist', {
+            axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/msglist', 
+            {
                 channel: props.channel
+            },{
+                headers: {
+                    Authorization: 'Bearer ' + user.token
+                }
             })
             .then((res) => {
                 let newMessages = res.data.msgArr;
@@ -30,7 +37,7 @@ function ChatContainer(props) {
         return () => {
             window.clearInterval(refresh);
         }
-    }, [props.channel, messages])
+    }, [props.channel, messages, user])
 
     return (
       <div className="chatContainer">

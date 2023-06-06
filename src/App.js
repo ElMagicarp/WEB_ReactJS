@@ -5,19 +5,27 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import jwtDecode from 'jwt-decode';
+
+export const UserContext = createContext({});
 
 function App() {
   const [user, setUser] = useState({});
-  let isLogged = Object.keys(user).length > 0;
+  let isLogged = Object.keys(user).length > 0;;
+
 
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: (response) => {
-        setUser((u) => jwtDecode(response.credential));
+        setUser((u) => {
+          return {
+            ...jwtDecode(response.credential),
+            token: response.credential
+          }
+      });
       }
     });
     //google.accounts.id.prompt();
@@ -30,7 +38,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={isLogged ? <ChatPage user={user} />: <LoginPage />} />
+        <Route 
+        path="/" 
+        element={
+          <UserContext.Provider value={user}>
+            {isLogged ? <ChatPage />: <LoginPage />}
+          </UserContext.Provider>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

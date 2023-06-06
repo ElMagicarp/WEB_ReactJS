@@ -1,16 +1,21 @@
-import React from 'react';
+import { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import { UserContext } from "../App";
 
 function ChatInput(props) {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState('');
+  const user = useContext(UserContext);
   const sendMsg = () => {
-    axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/send', {
+    axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/send', 
+    {
       channel: props.channel,
-      author: props.user.name,
       message: value,
-      picture: props.user.picture
-    })
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + user.token
+        }
+      })
     .then(() => {
       setValue(() => '');
     })

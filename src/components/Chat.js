@@ -5,7 +5,7 @@ function Chat(props) {
     return (
       <div className="chatWindow">
         <ChatContainer channel={props.currentChan}/>
-        <ChatInput channel={props.currentChan} user={props.currentUser}/>
+        <ChatInput channel={props.currentChan} />
       </div>
     );
 }

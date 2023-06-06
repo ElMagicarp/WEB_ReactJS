@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ChannelBar from "../components/ChannelBar";
 import Chat from "../components/Chat";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { UserContext } from "../App";
 
 function ChatPage(props) {
     const [channel, setChannel] = useState("general");
     const [open, setOpen] = useState(false);
+    const user = useContext(UserContext)
     useEffect(() => {
       setOpen((o) => true)
     }, []);
@@ -16,14 +18,14 @@ function ChatPage(props) {
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen((o) => false)}
-        message={`Connecté en tant que ${props.user.name}`}
+        message={`Connecté en tant que ${user.name}`}
       >
       <Alert severity="success" sx={{ width: '100%' }}>
-        Connecté en tant que {props.user.name}
+        Connecté en tant que {user.name}
       </Alert>
       </Snackbar>
       <ChannelBar currentChan={channel} chanHandler={setChannel}/>
-      <Chat currentChan={channel} currentUser={props.user}/>
+      <Chat currentChan={channel} />
       </>
     );
 }

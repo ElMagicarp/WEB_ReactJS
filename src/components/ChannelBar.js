@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ChannelName from './ChannelName';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
+import { UserContext } from '../App';
 
 function ChannelBar(props) {
     const [channels, setChannels] = useState([]);
     const currentChannel = props.currentChan;
+    const user = useContext(UserContext);
     useEffect(() => {
-        axios.get('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/channelList')
+        axios.get('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/channelList', {
+            headers: {
+                Authorization: 'Bearer ' + user.token
+                }})
             .then((res) => {
                 setChannels(res.data.chanList)
             })
             .catch((err) => {
                 console.log(err)
             })
-    }, [])
+    }, [user])
     return (
       <div className="channelBar">
         <div className="header">
