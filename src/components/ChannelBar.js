@@ -3,10 +3,16 @@ import axios from 'axios';
 import ChannelName from './ChannelName';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
+import Collapse from '@mui/material/Collapse';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import PersonIcon from '@mui/icons-material/Person';
 import { UserContext } from '../App';
 
 function ChannelBar(props) {
     const [channels, setChannels] = useState([]);
+    const [open, setOpen] = useState(false);
     const currentChannel = props.currentChan;
     const user = useContext(UserContext);
     useEffect(() => {
@@ -35,6 +41,22 @@ function ChannelBar(props) {
             <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
             )
             }
+            <ListItemButton onClick={()=> setOpen((o)=>!o)}>
+                <ListItemIcon sx={{color:"white"}}>
+                    <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary="Messages privés" />
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemText primary="user1" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemText primary="user2" />
+                    </ListItemButton>
+                </List>
+            </Collapse>
         </List>
       </div>
     );

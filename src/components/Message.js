@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import { Avatar } from "@mui/material";
 
+
+const twoDigits = (n) => {
+    if (Math.log(n) / Math.log(10) < 1) {
+        return "0" + n;
+    }
+    return n;
+}
+
 function Message(props){
     const [date, setDate] = useState('');
     useEffect(() => {
         let d = new Date(props.timestamp);
-        let day = d.getDate();
-        let month = d.getMonth();
-        let h = d.getHours();
-        let m = d.getMinutes();
+        let day = twoDigits(d.getDate());
+        let month = twoDigits(d.getMonth());
+        let h = twoDigits(d.getHours());
+        let m = twoDigits(d.getMinutes());
         setDate(() => day + "/" + month + " à " + h + ":" + m);
     }, [props.timestamp])
 
