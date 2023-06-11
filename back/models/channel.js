@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const collectionName = "channels";
 
 const chanSchema = mongoose.Schema({
-    name : {type : String, required : true}
+    name : {type : String, required : true},
+    userList : {type : [String], false : true}
     },
     {collection : collectionName}
 );

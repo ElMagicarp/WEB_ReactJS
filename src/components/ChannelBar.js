@@ -11,22 +11,23 @@ import PersonIcon from '@mui/icons-material/Person';
 import { UserContext } from '../App';
 
 function ChannelBar(props) {
-    const [channels, setChannels] = useState([]);
     const [open, setOpen] = useState(false);
     const currentChannel = props.currentChan;
     const user = useContext(UserContext);
+
     useEffect(() => {
         axios.get('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/channelList', {
             headers: {
                 Authorization: 'Bearer ' + user.token
                 }})
             .then((res) => {
-                setChannels(res.data.chanList)
+                props.setChannels(res.data.chanList)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [user])
+
     return (
       <div className="channelBar">
         <div className="header">
@@ -34,10 +35,10 @@ function ChannelBar(props) {
         </div>
         <List
             sx={{ width: '100%', bgcolor: '#8395a7'}}
-            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}
+            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>hey</ListSubheader>}
             >
             {
-            channels.map((chan,index) => 
+            (props.channels).map((chan,index) => 
             <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
             )
             }

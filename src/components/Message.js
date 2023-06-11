@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Avatar } from "@mui/material";
-
+import Icon_menu from "./Icon_menu"
 
 const twoDigits = (n) => {
     if (Math.log(n) / Math.log(10) < 1) {
@@ -22,16 +21,17 @@ function Message(props){
 
     return (
         <div className="message">
-            <Avatar alt={props.author} src={props.picture} sx={{ width: 50, height: 50}} />
-            <div className="msgContent">
-                
-                <div className="author">
-                    {props.author} <div className="date">{date}</div>
-                </div>
-                <div className="text">{props.content}</div>
-            </div>
+        {console.log("Message :" + props.channelList)}
+        <Icon_menu picture={props.picture} author={props.author} channelList={props.channelList}/>
+        <div className="msgContent">
+            
+            <div className="author"> 
+                {props.author} <div className="date">{date}</div>
+            </div>.channelList
+            <div className="text">{props.content}</div>
         </div>
-    )
+    </div>
+)
 }
 
 export default Message;

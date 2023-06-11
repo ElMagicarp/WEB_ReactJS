@@ -7,6 +7,7 @@ import { UserContext } from "../App";
 
 function ChatPage(props) {
     const [channel, setChannel] = useState("general");
+    const [channels,setChannels] = useState([]);
     const [open, setOpen] = useState(false);
     const user = useContext(UserContext)
     useEffect(() => {
@@ -24,8 +25,9 @@ function ChatPage(props) {
         Connecté en tant que {user.name}
       </Alert>
       </Snackbar>
-      <ChannelBar currentChan={channel} chanHandler={setChannel}/>
-      <Chat currentChan={channel} />
+      <ChannelBar currentChan={channel} chanHandler={setChannel} setChannels={(arg) => setChannels(arg)} channels ={channels}/>
+      {console.log("ChatPage :" + channels)}
+      <Chat currentChan={channel} channelList={channels}/>
       </>
     );
 }

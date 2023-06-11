@@ -23,4 +23,26 @@ router.get('/channelList', (req, res) => {
         })
 })
 
+// curl -X POST localhost:5000/api/channelList -H 'Content-Type: application/json' -d '{"channel":"name","userList":"userList"}'
+/*router.post('/newChannel', (req, res) => {
+    auth(req.headers.authorization)
+        .then(() => {
+        let newChannel = {
+            name: req.body.name,
+            userList: req.body.userList
+        }
+        let channel = new Channel(newChannel)
+        channel.save()
+            .then(() => {
+                res.status(200).send('Message sent successfully')
+            }
+            )
+            .catch((err) => {
+                console.log(err)
+                res.status(400).send('Unable to save to database')
+            }
+            )}
+
+)})
+*/
 module.exports = router
