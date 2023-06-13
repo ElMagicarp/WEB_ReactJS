@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Icon_menu from "./Icon_menu"
+import UserAvatar from "./UserAvatar"
 
 const twoDigits = (n) => {
     if (Math.log(n) / Math.log(10) < 1) {
@@ -22,12 +22,12 @@ function Message(props){
     return (
         <div className="message">
         {console.log("Message :" + props.channelList)}
-        <Icon_menu picture={props.picture} author={props.author} channelList={props.channelList}/>
+        <UserAvatar picture={props.picture} author={props.author} />
         <div className="msgContent">
             
             <div className="author"> 
                 {props.author} <div className="date">{date}</div>
-            </div>.channelList
+            </div>
             <div className="text">{props.content}</div>
         </div>
     </div>

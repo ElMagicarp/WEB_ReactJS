@@ -3,10 +3,10 @@ const client = new OAuth2Client(process.env.REACT_APP_GOOGLE_CLIENT_ID);
 
 const auth = (authHeader) => {
     // Verify token, returns user object if valid, else returns null
-    if (authHeader === null || authHeader === undefined || authHeader === '') {
-        return null
-    }
     return new Promise((resolve, reject) => {
+        if (authHeader === null || authHeader === undefined || authHeader === '') {
+            reject(null);
+        }
         let token = authHeader.split(' ')[1]
         client.verifyIdToken({
             idToken: token,

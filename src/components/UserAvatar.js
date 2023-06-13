@@ -11,7 +11,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { UserContext } from '../App.js';
 
 
-export default function Icon_menu({picture, author, channelList}) {
+function UserAvatar({picture, author, channelList}) {
     const currentUser = useContext(UserContext);
     const [channelExist, setChannelExist] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -118,3 +118,5 @@ export default function Icon_menu({picture, author, channelList}) {
     </>
   );
 }
+
+export default UserAvatar;

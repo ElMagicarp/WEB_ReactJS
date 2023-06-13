@@ -11,6 +11,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { UserContext } from '../App';
 
 function ChannelBar(props) {
+    const [channels, setChannels] = useState([]);
     const [open, setOpen] = useState(false);
     const currentChannel = props.currentChan;
     const user = useContext(UserContext);
@@ -21,7 +22,7 @@ function ChannelBar(props) {
                 Authorization: 'Bearer ' + user.token
                 }})
             .then((res) => {
-                props.setChannels(res.data.chanList)
+                setChannels((c) => res.data.public)
             })
             .catch((err) => {
                 console.log(err)
@@ -35,10 +36,10 @@ function ChannelBar(props) {
         </div>
         <List
             sx={{ width: '100%', bgcolor: '#8395a7'}}
-            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>hey</ListSubheader>}
+            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}
             >
             {
-            (props.channels).map((chan,index) => 
+            channels.map((chan,index) => 
             <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
             )
             }

@@ -4,8 +4,7 @@ import ChatInput from './ChatInput';
 function Chat(props) {
     return (
       <div className="chatWindow">
-        {console.log("Chat :" + props.channelList)}
-        <ChatContainer channel={props.currentChan} channelList={props.channelList}/>
+        <ChatContainer channel={props.currentChan} />
         <ChatInput channel={props.currentChan} />
       </div>
     );
