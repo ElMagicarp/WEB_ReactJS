@@ -4,8 +4,7 @@ const Message = require('../models/message.js')
 const Channel = require('../models/channel.js')
 const auth = require('./googleAuth.js')
 
-// curl -X POST localhost:5000/api/send -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"message":"hello", "channel":"general"}'
-
+// curl -X POST localhost:5000/api/send -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"channel":{"name":"general", "type":"public"}, "message":"test"}'
 router.post('/send', (req, res) => {
     auth(req.headers.authorization)
         .then((user) => {
@@ -65,7 +64,7 @@ router.post('/send', (req, res) => {
         })
 })
 
-// curl -X POST localhost:5000/api/msglist -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"channel":"general"}'
+// curl -X POST localhost:5000/api/msglist -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"name":"general", "type":"public""}'
 router.post('/msglist', (req, res) => {
     auth(req.headers.authorization)
         .then((currentUser) => {

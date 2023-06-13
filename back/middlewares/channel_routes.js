@@ -40,6 +40,7 @@ router.get('/channelList', (req, res) => {
         })
 })
 
+// curl -X POST localhost:5000/api/createChannel -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"name":"test", "sub":"1337"}'
 router.post('/createChannel', (req, res) => {
     auth(req.headers.authorization)
         .then((currentUser) => {
