@@ -13,20 +13,21 @@ import { UserContext } from '../App';
 function ChannelBar(props) {
     const [channels, setChannels] = useState({public:[], private:[]});
     const [open, setOpen] = useState(true);
-    const currentChannel = props.currentChan;
+    const currentChannel = props.currentChan.name;
     const user = useContext(UserContext);
 
     useEffect(() => {
         axios.get('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/channelList', {
             headers: {
                 Authorization: 'Bearer ' + user.token
-                }})
-            .then((res) => {
-                setChannels((c) => res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            }
+        })
+        .then((res) => {
+            setChannels((c) => res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }, [user])
 
     return (

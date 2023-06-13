@@ -10,7 +10,6 @@ import IconButton from '@mui/material/IconButton';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import ChatIcon from '@mui/icons-material/Chat';
 
-
 function UserAvatar(props) {
     const currentUser = useContext(UserContext);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -35,7 +34,8 @@ function UserAvatar(props) {
         }
       })
       .then((res) => {
-        props.chanHandler(res.data.name);
+        console.log("test")
+        props.chanHandler(props.author.name);
       }
       )
       .catch((err) => {

@@ -3,38 +3,25 @@ const router = express.Router()
 const Channel = require('../models/channel.js')
 const auth = require('./googleAuth.js')
 
-const isInChannel = (sub, channel) => {
-    for (let i = 0; i < channel.userList.length; i++) {
-        if (channel.userList[i].sub === sub) {
-            return true
-        }
-    }
-    return false
-}
-
-const getChannelName = (sub, channel) => {
-    // Returns the name of the other user in the channel
-    for (let i = 0; i < channel.userList.length; i++) {
-        if (channel.userList[i].sub !== sub) {
-            return channel.userList[i].name
-        }
-    }
-}
-
 // curl -X -H 'Authorization: Token test' localhost:5000/api/channelList
 router.get('/channelList', (req, res) => {
     auth(req.headers.authorization)
         .then((user) => {
-            Channel.find()
+            Channel.find({$or :[
+                {userList: { $elemMatch: { sub: user.sub } }},
+                {userList: { $exists: false } },
+                {userList: { $size: 0 } }
+            ]})
                 .then((chanArr) => {
                     result = {}
                     result.private = []
                     result.public = []
-                    idUser = user.sub
                     for (let i = 0; i < chanArr.length; i++) {
                         if (chanArr[i].userList.length >= 2) {
-                            if (isInChannel(idUser, chanArr[i])) {
-                                result.private.push(getChannelName(idUser, chanArr[i]))
+                            for (let j = 0; j < chanArr[i].userList.length; j++) {
+                                if (chanArr[i].userList[j].sub !== user.sub) {
+                                    result.private.push(chanArr[i].userList[j].name)
+                                }
                             }
                         }
                         else {
@@ -56,16 +43,15 @@ router.get('/channelList', (req, res) => {
 router.post('/createChannel', (req, res) => {
     auth(req.headers.authorization)
         .then((currentUser) => {
-            //check if channel already exists
+            // check if channel already exists
             let exists = false
-            Channel.find( {userList: { $elemMatch: { sub: currentUser.sub } } } )
-                .then((channels) => {
-                    for (let i = 0; i < channels.length; i++) {
-                        if (isInChannel(req.body.sub, channels[i])) {
-                            res.status(200).send('Channel already exists')
-                            exists = true
-                            break
-                        }
+            Channel.findOne( {$and :[
+                    {userList: { $elemMatch: { sub: currentUser.sub } } },
+                    {userList:{ $elemMatch: { sub: req.body.sub } } }]})
+                .then((chan) => { // channels contains all channels where user is present
+                    if (chan) {
+                        exists = true
+                        res.status(200).send('Channel already exists')
                     }
                     if (!exists){
                         user1 = {

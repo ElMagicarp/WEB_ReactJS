@@ -7,7 +7,10 @@ import TagIcon from '@mui/icons-material/Tag';
 function ChannelName(props){
 
     const changeChannel = () => {
-        props.chanHandler(props.name);
+        props.chanHandler({
+            name: props.name,
+            type: props.isPublic ? "public" : "private"
+        })
     }
     return (
         <ListItemButton 

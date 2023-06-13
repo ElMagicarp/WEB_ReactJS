@@ -9,7 +9,7 @@ function ChatInput(props) {
   const sendMsg = () => {
     axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/send', 
     {
-      channel: props.channel,
+      channel: { name: props.channel.name, type: props.channel.type },
       message: value,
     }, {
       headers: {

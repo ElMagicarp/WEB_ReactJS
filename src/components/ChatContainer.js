@@ -16,7 +16,8 @@ function ChatContainer(props) {
         let request = () => {
             axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/msglist', 
             {
-                channel: props.channel
+                name: props.channel.name,
+                type: props.channel.type
             },{
                 headers: {
                     authorization: 'Bearer ' + user.token
@@ -41,7 +42,7 @@ function ChatContainer(props) {
 
     return (
       <div className="chatContainer">
-      {messages.map((m,index) => <Message author={m.author} key={index} content={m.message} timestamp={m.createdAt} />)}
+      {messages.map((m,index) => <Message author={m.author} key={index} content={m.message} timestamp={m.createdAt} chanHandler={props.chanHandler}/>)}
       </div>
     );
 }

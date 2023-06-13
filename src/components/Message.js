@@ -21,7 +21,7 @@ function Message(props){
 
     return (
         <div className="message">
-        <UserAvatar picture={props.author.picture} author={props.author} />
+        <UserAvatar picture={props.author.picture} author={props.author} chanHandler={props.chanHandler}/>
         <div className="msgContent">
             
             <div className="author"> 

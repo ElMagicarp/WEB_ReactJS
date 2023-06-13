@@ -1,12 +1,16 @@
 import React, { useState, useContext } from "react";
 import ChannelBar from "../components/ChannelBar";
-import Chat from "../components/Chat";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { UserContext } from "../App";
+import ChatContainer from "../components/ChatContainer";
+import ChatInput from "../components/ChatInput";
 
 function ChatPage(props) {
-    const [channel, setChannel] = useState("general");
+    const [channel, setChannel] = useState({
+        name: "general",
+        type: "public"
+    });
     const [open, setOpen] = useState(true);
     const user = useContext(UserContext)
     return (
@@ -22,7 +26,10 @@ function ChatPage(props) {
       </Alert>
       </Snackbar>
       <ChannelBar currentChan={channel} chanHandler={setChannel} />
-      <Chat currentChan={channel} />
+      <div className="chatWindow">
+      <ChatContainer channel={channel} chanHandler={setChannel} />
+      <ChatInput channel={channel} />
+      </div>
       </>
     );
 }
