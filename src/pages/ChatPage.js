@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import ChannelBar from "../components/ChannelBar";
 import Chat from "../components/Chat";
 import Snackbar from '@mui/material/Snackbar';
@@ -7,11 +7,8 @@ import { UserContext } from "../App";
 
 function ChatPage(props) {
     const [channel, setChannel] = useState("general");
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const user = useContext(UserContext)
-    useEffect(() => {
-      setOpen((o) => true)
-    }, []);
     return (
       <>
       <Snackbar

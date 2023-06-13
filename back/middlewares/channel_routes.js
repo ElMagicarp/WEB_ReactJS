@@ -32,7 +32,7 @@ router.get('/channelList', (req, res) => {
                     result.public = []
                     idUser = user.sub
                     for (let i = 0; i < chanArr.length; i++) {
-                        if (chanArr[i].hasOwnProperty('userList')) {
+                        if (chanArr[i].userList.length >= 2) {
                             if (isInChannel(idUser, chanArr[i])) {
                                 result.private.push(getChannelName(idUser, chanArr[i]))
                             }
@@ -55,29 +55,46 @@ router.get('/channelList', (req, res) => {
 
 router.post('/createChannel', (req, res) => {
     auth(req.headers.authorization)
-        .then(() => {
-            user1 = {
-                name: req.user.name,
-                sub: req.user.sub
-            };
-            user2 = {
-                name: req.body.user2,
-                sub: req.body.sub2
-            };
-            users = [user1, user2]
-            const newChannel = new Channel({
-                userList: users
-            })
-            newChannel.save()
-                .then(() => {
-                    res.status(200).send('Channel created')
+        .then((currentUser) => {
+            //check if channel already exists
+            let exists = false
+            Channel.find( {userList: { $elemMatch: { sub: currentUser.sub } } } )
+                .then((channels) => {
+                    for (let i = 0; i < channels.length; i++) {
+                        if (isInChannel(req.body.sub, channels[i])) {
+                            res.status(200).send('Channel already exists')
+                            exists = true
+                            break
+                        }
+                    }
+                    if (!exists){
+                        user1 = {
+                            name: currentUser.name,
+                            sub: currentUser.sub
+                        };
+                        user2 = {
+                            name: req.body.name,
+                            sub: req.body.sub
+                        };
+                        users = [user1, user2]
+                        const newChannel = new Channel({
+                            userList: users
+                        })
+                        newChannel.save()
+                            .then(() => {
+                                res.status(200).send('Channel created')
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                res.status(400).send('Unable to create channel')
+                            })
+                    }
                 })
-                .catch((err) => {
-                    console.log(err)
-                    res.status(400).send('Unable to create channel')
-                })
+                .catch((err) => console.log(err))
+
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err)
             res.status(400).send('Invalid token')
         })
 })

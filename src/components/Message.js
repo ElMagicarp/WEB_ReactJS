@@ -21,12 +21,11 @@ function Message(props){
 
     return (
         <div className="message">
-        {console.log("Message :" + props.channelList)}
-        <UserAvatar picture={props.picture} author={props.author} />
+        <UserAvatar picture={props.author.picture} author={props.author} />
         <div className="msgContent">
             
             <div className="author"> 
-                {props.author} <div className="date">{date}</div>
+                {props.author.name} <div className="date">{date}</div>
             </div>
             <div className="text">{props.content}</div>
         </div>

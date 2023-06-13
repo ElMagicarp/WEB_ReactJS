@@ -41,7 +41,7 @@ function ChatContainer(props) {
 
     return (
       <div className="chatContainer">
-      {messages.map((m,index) => <Message author={m.author.name} key={index} content={m.message} picture={m.author.picture} timestamp={m.createdAt} />)}
+      {messages.map((m,index) => <Message author={m.author} key={index} content={m.message} timestamp={m.createdAt} />)}
       </div>
     );
 }

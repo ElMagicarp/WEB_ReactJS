@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { UserContext } from '../App.js';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -8,48 +9,39 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import ChatIcon from '@mui/icons-material/Chat';
-import { UserContext } from '../App.js';
 
 
-function UserAvatar({picture, author, channelList}) {
+function UserAvatar(props) {
     const currentUser = useContext(UserContext);
-    const [channelExist, setChannelExist] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
-    const createChat = ({Name,UserList}) => {
-      channelList.map((channel)=>{
-        if (channel.name === Name){
-          setChannelExist(channelExist || true);
-        }
-        return;
-      })
-      if (!channelExist) {
-          axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/newChannel',{
-              name:Name,
-              userList:UserList
-          })
-              .catch((err) => {
-                  console.log(err)
-              })
-      }
-    }
-
     const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+      if (currentUser.sub !== props.author.sub){
+        setAnchorEl(event.currentTarget);
+      }
     };
 
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+    const handleClose = () => setAnchorEl(null);
 
-    const handleAddFriends = (userName) => {
-
-    };
-
-    const handleCreatePrivateChannel = (name,userList) => {
-      createChat(name,userList);
-      console.log(channelExist)
+    const handlePrivateChan = () => {
+      axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/createChannel',
+      {
+        name: props.author.name,
+        sub: props.author.sub
+      },{
+        headers: {
+          authorization: 'Bearer ' + currentUser.token
+        }
+      })
+      .then((res) => {
+        props.chanHandler(res.data.name);
+      }
+      )
+      .catch((err) => {
+        console.log(err)
+      }
+      );
     };
 
     return (
@@ -63,7 +55,7 @@ function UserAvatar({picture, author, channelList}) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
             >
-                <Avatar alt={author} src={picture} sx={{ width: 50, height: 50}} />
+                <Avatar alt={props.author.name} src={props.author.picture} sx={{ width: 50, height: 50}} />
             </IconButton>
         </Box>
         <Menu
@@ -101,13 +93,13 @@ function UserAvatar({picture, author, channelList}) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-        <MenuItem onClick={() => handleAddFriends}>
+        <MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Add "{author}" to your Friends
+          Add "{props.author.name}" to your Friends
         </MenuItem>
-        <MenuItem onClick={() => handleCreatePrivateChannel ("Private "+author+"/"+currentUser.name ,[author,currentUser.name])}>
+        <MenuItem onClick={() => handlePrivateChan()}>
           <ListItemIcon>
             <ChatIcon fontSize="small" />
           </ListItemIcon>

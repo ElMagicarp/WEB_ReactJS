@@ -11,8 +11,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import { UserContext } from '../App';
 
 function ChannelBar(props) {
-    const [channels, setChannels] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [channels, setChannels] = useState({public:[], private:[]});
+    const [open, setOpen] = useState(true);
     const currentChannel = props.currentChan;
     const user = useContext(UserContext);
 
@@ -22,7 +22,7 @@ function ChannelBar(props) {
                 Authorization: 'Bearer ' + user.token
                 }})
             .then((res) => {
-                setChannels((c) => res.data.public)
+                setChannels((c) => res.data)
             })
             .catch((err) => {
                 console.log(err)
@@ -39,8 +39,8 @@ function ChannelBar(props) {
             subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}
             >
             {
-            channels.map((chan,index) => 
-            <ChannelName name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
+            channels.public.map((chan,index) => 
+            <ChannelName isPublic={true} name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
             )
             }
             <ListItemButton onClick={()=> setOpen((o)=>!o)}>
@@ -51,12 +51,11 @@ function ChannelBar(props) {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="user1" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemText primary="user2" />
-                    </ListItemButton>
+                    {
+                    channels.private.map((chan,index) =>
+                    <ChannelName isPublic={false} name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
+                    )
+                    }
                 </List>
             </Collapse>
         </List>

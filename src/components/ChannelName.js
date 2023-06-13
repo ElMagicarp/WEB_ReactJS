@@ -5,6 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import TagIcon from '@mui/icons-material/Tag';
 
 function ChannelName(props){
+
     const changeChannel = () => {
         props.chanHandler(props.name);
     }
