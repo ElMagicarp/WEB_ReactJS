@@ -93,12 +93,12 @@ function UserAvatar(props) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-        <MenuItem>
+        {/*<MenuItem>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add "{props.author.name}" to your Friends
-        </MenuItem>
+        </MenuItem>*/}
         <MenuItem onClick={() => handlePrivateChan()}>
           <ListItemIcon>
             <ChatIcon fontSize="small" />
