@@ -15,9 +15,6 @@ function ChannelBar(props) {
 
     return (
       <div className="channelBar">
-        <div className="header">
-            <h1>tc chat</h1>
-        </div>
         <List
             sx={{ width: '100%', bgcolor: '#8395a7'}}
             subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}

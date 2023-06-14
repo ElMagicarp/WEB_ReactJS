@@ -37,23 +37,31 @@ function ChatPage(props) {
   }, [user, channelList])
 
     return (
-      <>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen((o) => false)}
-        message={`Connecté en tant que ${user.name}`}
-      >
-      <Alert severity="success" sx={{ width: '100%' }}>
-        Connecté en tant que {user.name}
-      </Alert>
-      </Snackbar>
-      <ChannelBar currentChan={channel} chanHandler={setChannel} chanList={channelList}/>
-      <div className="chatWindow">
-      <ChatContainer channel={channel} chanHandler={setChannel} />
-      <ChatInput channel={channel} />
+      <div className="chatPage">
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={() => setOpen((o) => false)}
+          message={`Connecté en tant que ${user.name}`}
+        >
+          <Alert severity="success" sx={{ width: '100%' }}>
+            Connecté en tant que {user.name}
+          </Alert>
+        </Snackbar>
+        <div className="leftSide">
+          <ChannelBar currentChan={channel} chanHandler={setChannel} chanList={channelList}/>
+        </div>
+        <div className="rightSide">
+            <div className="topSide">
+              <ChatContainer channel={channel} chanHandler={setChannel} />
+            </div>
+            <div className="buttomSide">
+              <ChatInput channel={channel} />
+            </div>
+          
+        <div/>
+        </div>
       </div>
-      </>
     );
 }
   

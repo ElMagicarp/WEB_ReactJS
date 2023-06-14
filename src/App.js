@@ -1,5 +1,7 @@
 import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
+import Footer from './components/Footer';
+import Header from './components/Header';
 import {
   BrowserRouter,
   Routes,
@@ -36,18 +38,22 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route 
-        path="/" 
-        element={
-          <UserContext.Provider value={user}>
-            {isLogged ? <ChatPage />: <LoginPage />}
-          </UserContext.Provider>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className='App'>
+      <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route 
+            path="/" 
+            element={
+              <UserContext.Provider value={user}>
+                {isLogged ? <ChatPage />: <LoginPage />}
+              </UserContext.Provider>
+              }
+            />
+          </Routes>
+          <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

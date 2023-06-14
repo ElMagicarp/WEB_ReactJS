@@ -29,8 +29,9 @@ function ChatInput(props) {
         label="Message"
         multiline
         fullWidth
+        fullHight
         sx= {{backgroundColor: "rgba(255, 255, 255, 0.7)"}}
-        inputProps={{ style: {height: "100px" }}}
+        inputProps={{ style: {height: "100%", width: "100%"}}}
         onChange={(e) => setValue((v) => e.target.value)}
         value={value}
         onKeyDown={(e) => {
