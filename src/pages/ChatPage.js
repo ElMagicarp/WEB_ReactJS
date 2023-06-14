@@ -43,8 +43,10 @@ function ChatPage(props) {
           autoHideDuration={6000}
           onClose={() => setOpen((o) => false)}
           message={`Connecté en tant que ${user.name}`}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          sx={{ width: '100%'}}
         >
-          <Alert severity="success" sx={{ width: '100%' }}>
+          <Alert severity="success" sx={{ width: '30%' }} >
             Connecté en tant que {user.name}
           </Alert>
         </Snackbar>

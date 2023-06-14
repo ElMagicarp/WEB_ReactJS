@@ -2,7 +2,7 @@
 
 #root{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
     width: 100%;
 }
@@ -25,14 +25,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
     width: 100%;
-  }
-
-.App {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, Helvetica, sans-serif;
   }
 
 .chatPage {

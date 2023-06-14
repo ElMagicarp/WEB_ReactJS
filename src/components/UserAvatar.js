@@ -59,7 +59,7 @@ function UserAvatar(props) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
             >
-                <Avatar alt={props.author.name} src={props.author.picture} sx={{ width: 50, height: 50}} />
+                <Avatar alt={props.author.name} src={props.author.picture} sx={{ width: 50, height: 50}} imgProps={{ referrerPolicy: "no-referrer" }} />
             </IconButton>
         </Box>
         <Menu
