@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Channel = require('../models/channel.js')
+const Message = require('../models/message.js')
 const auth = require('./googleAuth.js')
 
 // curl -X -H 'Authorization: Token test' localhost:5000/api/channelList
@@ -85,5 +86,43 @@ router.post('/createChannel', (req, res) => {
             res.status(400).send('Invalid token')
         })
 })
+
+// curl -X POST localhost:5000/api/deleteChannel -H 'Content-Type: application/json' -H 'Authorization: Bearer test' -d '{"name":"test", "type":"private"}'
+router.post('/deleteChannel', (req, res) => {
+    auth(req.headers.authorization)
+        .then((currentUser) => {
+            if (req.body.type === "private") {
+                Channel.findOne( {$and :[
+                        {userList: { $elemMatch: { sub: currentUser.sub } } },
+                        {userList:{ $elemMatch: { name: req.body.name } } }]})
+                    .then((chan) => {
+                        Message.deleteMany({channel: chan._id})
+                            .then(() => {
+                                Channel.deleteOne({_id: chan._id})
+                                    .then(() => {
+                                        res.status(200).send('Channel deleted')
+                                    })
+                                    .catch((err) => {
+                                        console.log(err)
+                                        res.status(400).send('Unable to delete channel')
+                                    })
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                res.status(400).send('Unable to delete channel')
+                            })
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        res.status(400).send('Unable to delete channel')
+                    })
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(400).send('Invalid token')
+        })
+})
+
 
 module.exports = router

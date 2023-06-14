@@ -34,9 +34,9 @@ function ChatContainer(props) {
             });
         }
         request();
-        let refresh = window.setInterval(request, 1000);
+        let refresh = setInterval(request, 1000);
         return () => {
-            window.clearInterval(refresh);
+            clearInterval(refresh);
         }
     }, [props.channel, messages, user])
 

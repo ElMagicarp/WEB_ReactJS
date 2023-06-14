@@ -34,8 +34,12 @@ function UserAvatar(props) {
         }
       })
       .then((res) => {
-        console.log("test")
-        props.chanHandler(props.author.name);
+        props.chanHandler(() => {
+          return {
+            name : props.author.name,
+            type: "private"
+          }
+        });
       }
       )
       .catch((err) => {

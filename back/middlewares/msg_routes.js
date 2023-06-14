@@ -92,6 +92,10 @@ router.post('/msglist', (req, res) => {
                     {userList: { $elemMatch: { sub: currentUser.sub } } },
                     {userList:{ $elemMatch: { name: req.body.name } } }]})
                     .then((chan) => {
+                        if (!chan) {
+                            res.status(400).send('Unable to get channel')
+                            return
+                        }
                         Message.find({ channel: chan._id })
                             .then((messages) => {
                                 result = {}
