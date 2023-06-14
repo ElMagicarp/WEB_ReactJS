@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+//import PersonAdd from '@mui/icons-material/PersonAdd';
 import ChatIcon from '@mui/icons-material/Chat';
 
 function UserAvatar(props) {
@@ -105,7 +105,6 @@ function UserAvatar(props) {
           </ListItemIcon>
           Converse with
         </MenuItem>
-
       </Menu>
     </>
   );
