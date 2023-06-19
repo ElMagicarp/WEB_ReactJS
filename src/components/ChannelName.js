@@ -6,6 +6,7 @@ import TagIcon from '@mui/icons-material/Tag';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItem from '@mui/material/ListItem';
+import PersonIcon from '@mui/icons-material/Person';
 import axios from 'axios';
 import { UserContext } from '../App';
 
@@ -55,7 +56,7 @@ function ChannelName(props){
             
                 <ListItemIcon style={{ color: "white" }}>
                     {
-                        (props.isPublic) ? <TagIcon /> : <></>
+                        (props.isPublic) ? <TagIcon /> : <PersonIcon />
                     }
                 
                 </ListItemIcon>

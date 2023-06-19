@@ -54,7 +54,6 @@ function UserAvatar(props) {
             <IconButton
                 onClick={handleClick}
                 size="small"
-                sx={{ ml: 2 }}
                 aria-controls={open ? 'account-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
@@ -97,12 +96,6 @@ function UserAvatar(props) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-        {/*<MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add "{props.author.name}" to your Friends
-        </MenuItem>*/}
         <MenuItem onClick={() => handlePrivateChan()}>
           <ListItemIcon>
             <ChatIcon fontSize="small" />

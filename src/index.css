@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito%20Sans');
 
 #root{
-    display: flex;
-    flex-direction: column;
     height: 100%;
     width: 100%;
 }
@@ -17,7 +15,6 @@ h1 {
     margin:0;
 }
 body {
-    background-color: #c8d6e5;
     padding :0;
     margin: 0;
     font-family: 'Nunito', sans-serif;
@@ -28,28 +25,27 @@ body {
   }
 
 .chatPage {
+    background-color: #ecf0f1;
     width: 100%;
     height: 100%;
     display: flex;
   }
   
-  .chatPage .leftSide {
-    height: 100%;
-    width: 20%;
-  }
-  
   .chatPage .rightSide {
     height: 100%;
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
   }
 
   .channelBar{
     color: #fff;
-    height: 100%;
     background-color: #8395a7;
-    width: 100%;
-    }
-
+    height: 100%;
+    width:20%;
+  }
 
     .channelName{
         display: flex;
@@ -62,51 +58,15 @@ body {
         padding : 10px;
     }
 
-    .channelName:hover{
-        background-color: #31445a;
-    }
-
-    .channelName.active{
-        font-weight: 900;
-        background-color: #18212b;
-    }
-
-    .chatPage .rightSide .topSide{
-        height: 80%;
-        width: 100%;
-        padding-top: 20px;
-        padding-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        background-color: #c8d6e5;
-    }
-
-    .chatPage .rightSide .buttomSide{
-        height: 10%;
-        width: 100%;
-        padding-top: 0px;
-        padding-bottom: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-        background-color: #c8d6e5;
-    }
-
     .chatContainer{
         width: 100%;
-        height: 100%;
         overflow-y: scroll;
-        background-color: rgba(255,255,255,0.4);
-        border-radius: 10px;
     }
 
     .message{
-        border-bottom: 2px solid rgba(0,0,0,0.05);
-        padding-bottom: 10px;
-        padding-top: 10px;
+        padding: 10px 30px;
         display: flex;
-    }
-    .message:last-child{
-        border-bottom: none;
+        color: #00204a;
     }
 
     .message .author{
@@ -133,28 +93,15 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
-  }
-  
-  .loginPage .leftSide {
-    height: 100%;
-    flex: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  .loginPage .rightSide {
-    height: 100%;
-    flex: 50%;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
+    background-color: #ecf0f1;
+    align-items: center;
+    justify-content: space-between;
   }
+  
 
 .footer {
     width: 100%;
-    height: 100px;
-    background-color: #d9faff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,8 +111,8 @@ body {
   
   .socialMedia svg {
     color: #00204a;
-    margin: 20px;
-    font-size: 50px;
+    margin: 10px;
+    font-size: 40px;
     cursor: pointer;
   }
   
@@ -174,29 +121,15 @@ body {
   }
 
 .header {
-    width: 100%;
-    height: 100px;
-    background-color: #d9faff;
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .header .leftSide {
-    flex: 50%;
+  width: 100%;
+  height: 100px;
+}
+
+.header .logo {
     height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 150px;
-  }
-  
-  .header .leftSide img {
-    height: 90%;
-  }
-  
-  .header .rightSide {
-    flex: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    margin: 0 100px;
+}
+
+.chatPage .chatInput {
+    margin-top: 5px;
+}

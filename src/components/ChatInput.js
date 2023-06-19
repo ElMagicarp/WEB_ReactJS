@@ -25,8 +25,10 @@ function ChatInput(props) {
   }
   return (
     <TextField
-        id="outlined-multiline-flexible"
-        label="Message"
+        className="chatInput"
+        label={
+          props.channel.type === 'public' ? 'Envoyer un message dans #'+props.channel.name : 'Envoyer un message à '+props.channel.name
+        }
         multiline
         fullWidth
         sx= {{backgroundColor: "rgba(255, 255, 255, 0.7)"}}

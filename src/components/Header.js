@@ -6,11 +6,7 @@ import "../index.css";
 function Header() {
   return (
     <div className="header">
-        <div className="leftSide">
-            <img src={Logo} alt="logo"/>
-        </div>
-        <div className="rightSide">
-        </div>
+            <img className="logo" src={Logo} alt="logo"/>
     </div>
   )
 }

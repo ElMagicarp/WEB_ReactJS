@@ -43,25 +43,18 @@ function ChatPage(props) {
           autoHideDuration={6000}
           onClose={() => setOpen((o) => false)}
           message={`Connecté en tant que ${user.name}`}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           sx={{ width: '100%'}}
         >
           <Alert severity="success" sx={{ width: '30%' }} >
             Connecté en tant que {user.name}
           </Alert>
         </Snackbar>
-        <div className="leftSide">
-          <ChannelBar currentChan={channel} chanHandler={setChannel} chanList={channelList}/>
-        </div>
+
+        <ChannelBar currentChan={channel} chanHandler={setChannel} chanList={channelList}/>
         <div className="rightSide">
-            <div className="topSide">
-              <ChatContainer channel={channel} chanHandler={setChannel} />
-            </div>
-            <div className="buttomSide">
-              <ChatInput channel={channel} />
-            </div>
-          
-        <div/>
+          <ChatContainer channel={channel} chanHandler={setChannel} />
+          <ChatInput channel={channel}/>
         </div>
       </div>
     );
