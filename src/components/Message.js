@@ -13,7 +13,7 @@ function Message(props){
     useEffect(() => {
         let d = new Date(props.timestamp);
         let day = twoDigits(d.getDate());
-        let month = twoDigits(d.getMonth());
+        let month = twoDigits(d.getMonth() + 1);
         let h = twoDigits(d.getHours());
         let m = twoDigits(d.getMinutes());
         setDate(() => day + "/" + month + " à " + h + ":" + m);

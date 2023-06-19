@@ -107,7 +107,7 @@ function UserAvatar(props) {
           <ListItemIcon>
             <ChatIcon fontSize="small" />
           </ListItemIcon>
-          Converse with
+          Message privé
         </MenuItem>
       </Menu>
     </>

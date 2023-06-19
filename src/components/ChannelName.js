@@ -21,6 +21,10 @@ function ChannelName(props){
     }
 
     const deleteChannel = () => {
+        props.chanHandler({
+            name: "general",
+            type: "public"
+        })
         axios.post('//localhost:'+ process.env.REACT_APP_BACK_PORT +'/api/deleteChannel', {
             name: props.name,
             type: props.isPublic ? "public" : "private"
@@ -30,10 +34,7 @@ function ChannelName(props){
             }
         })
         .then((res) => {
-            props.chanHandler({
-                name: "general",
-                type: "public"
-            })
+            
         })
         .catch((err) => {
             console.log(err)

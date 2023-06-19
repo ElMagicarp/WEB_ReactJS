@@ -17,7 +17,7 @@ function ChannelBar(props) {
       <div className="channelBar">
         <List
             sx={{ width: '100%', bgcolor: '#8395a7'}}
-            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Channels</ListSubheader>}
+            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Canaux</ListSubheader>}
             >
             {
             channelList.public.map((chan,index) => 
