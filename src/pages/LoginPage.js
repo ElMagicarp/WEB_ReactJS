@@ -9,15 +9,15 @@ function LoginPage() {
     <>
     <div className="loginPage">
       <Header />
-        <Paper 
-        elevation={3}
-        sx={{padding:"40px"}}
-        >
-          <h1 style={{marginBottom:'30px'}}><LoginIcon /> Connexion</h1>
-          <div id="googleSignIn"></div>
+      <Paper 
+      elevation={3}
+      sx={{padding:"40px"}}
+      >
+        <h1 style={{marginBottom:'30px'}}><LoginIcon /> Connexion</h1>
+        <div id="googleSignIn"></div>
 
-        </Paper>
-        <Footer />
+      </Paper>
+      <Footer />
     </div>
     </>
   );
