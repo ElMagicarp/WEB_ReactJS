@@ -7,10 +7,8 @@ function ChannelBar(props) {
     const channelList = props.chanList;
 
     return (
-        <List
-            className="channelBar"
-            subheader={<ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Canaux</ListSubheader>}
-        >
+        <List className="channelBar">
+            <ListSubheader sx={{bgcolor:"#8395a7", color:'white'}}>Canaux</ListSubheader>
             {
             channelList.public.map((chan,index) => 
             <ChannelName isPublic={true} name={chan} key={index} isSelected={chan === currentChannel} chanHandler={props.chanHandler}/>
