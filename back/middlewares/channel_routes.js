@@ -96,6 +96,10 @@ router.post('/deleteChannel', (req, res) => {
                         {userList: { $elemMatch: { sub: currentUser.sub } } },
                         {userList:{ $elemMatch: { name: req.body.name } } }]})
                     .then((chan) => {
+                        if (!chan) {
+                            res.status(400).send('Channel does not exist')
+                            return
+                        }
                         Message.deleteMany({channel: chan._id})
                             .then(() => {
                                 Channel.deleteOne({_id: chan._id})
